@@ -6,119 +6,558 @@
   <title>VIP Travel | ليموزين فاخرة</title>
   <meta name="description" content="VIP Travel — خدمات ليموزين (زفاف، رجال أعمال، توصيل مطارات، رحلات جامعية) في القاهرة والإسكندرية. سيارات حديثة وسائقين محترفين."/>
   <meta name="keywords" content="ليموزين, توصيل مطار, ليموزين زفاف, VIP Travel, ليموزين القاهرة, ليموزين الاسكندرية" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===========================
+     /* ===========================
        Reset & Base
        =========================== */
+     :root{
+      --bg:#fafafa;
+      --text:#1a1a1a;
+      --muted:#666;
+      --gold-1:#d4af37;
+      --gold-2:#c79b32;
+      --accent:linear-gradient(135deg,var(--gold-1),var(--gold-2));
+      --card:#ffffff;
+      --shadow:0 8px 30px rgba(0,0,0,0.08);
+      --radius:16px;
+     }
     * {box-sizing: border-box;}
-    html,body{height:100%;}
+    html {scroll-behavior: smooth;}
+    html,body{height:100%;margin:0;}
     body{
-      margin:0;
       font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
-      background:#f6f5f2;
-      color:#222;
-      line-height:1.6;
-      transition: direction 0.3s ease;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+      transition: all 0.3s ease;
     }
     .container{
       width:90%;
-      max-width:1180px;
+      max-width:1200px;
       margin:0 auto;
     }
 
-    /* WhatsApp floating */
+    /* WhatsApp floating with pulse animation */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
     .whatsapp{
       position:fixed;
-      left:20px;
-      bottom:20px;
+      left:24px;
+      bottom:24px;
       z-index:999;
       display:block;
-      width:56px;
-      height:56px;
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      box-shadow:0 8px 24px rgba(37, 211, 102, 0.4);
+      transition:transform 0.3s ease;
+      animation: pulse 2s infinite;
     }
-    .whatsapp img{width:100%;height:100%;}
+    .whatsapp:hover{transform:scale(1.15);animation:none;}
+    .whatsapp img{width:100%;height:100%;border-radius:50%;}
 
-    /* Header */
+    /* Header with glassmorphism */
     .site-header{
-      background:#ffffff;
-      box-shadow:0 1px 10px rgba(0,0,0,0.06);
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(10px);
+      box-shadow:0 2px 20px rgba(0,0,0,0.08);
       position:sticky;
       top:0;
       z-index:100;
+      border-bottom:1px solid rgba(199,155,50,0.1);
     }
-    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
-    .brand{display:flex;align-items:center;gap:12px;}
-    .logo{width:64px;height:auto;}
-    .brand-title{margin:0;font-size:20px;color:#c79b32;}
-    .brand-sub{margin:0;font-size:12px;color:#666;}
-    .main-nav{display:flex;align-items:center;gap:24px;}
-    .main-nav a{color:#333;text-decoration:none;font-size:16px;}
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 0;
+    }
+    .brand{display:flex;align-items:center;gap:14px;}
+    .logo{
+      width:68px;
+      height:auto;
+      filter:drop-shadow(0 2px 8px rgba(199,155,50,0.2));
+      transition:transform 0.3s ease;
+      border-radius: 20px;
+    }
+    .logo:hover{transform:scale(1.05);}
+    .brand-title{
+      margin:0;
+      font-size:24px;
+      font-weight:700;
+      background:linear-gradient(135deg, #d4af37 0%, #c79b32 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .brand-sub{margin:0;font-size:13px;color:#666;font-weight:400;}
+    .main-nav{display:flex;align-items:center;gap:28px;}
+    .main-nav a{
+      color:#333;
+      text-decoration:none;
+      font-size:16px;
+      font-weight:500;
+      position:relative;
+      padding:4px 0;
+      transition:color 0.3s ease;
+    }
+    .main-nav a:after{
+      content:'';
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:0;
+      height:2px;
+      background:linear-gradient(90deg, #d4af37, #c79b32);
+      transition:width 0.3s ease;
+    }
     .main-nav a:hover{color:#c79b32;}
+    .main-nav a:hover:after{width:100%;}
 
-    /* Hero */
-    .hero{padding:56px 0;background:linear-gradient(90deg,#fff 0%, #fbf7ee 100%);}
-    .hero-grid{display:flex;gap:30px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
-    .hero-text{flex:1 1 520px;}
-    .hero-text h2{font-size:36px;color:#c79b32;margin:0 0 12px;}
-    .hero-text p{font-size:18px;color:#444;margin:0 0 18px;}
-    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
-    .btn{display:inline-block;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;cursor:pointer;border:none;font-size:16px;}
-    .btn.primary{background:#c79b32;color:#fff;}
-    .btn.outline{background:transparent;border:2px solid #c79b32;color:#c79b32;}
-    .btn.sm{padding:8px 12px;font-size:14px;}
-    .quick-list{display:flex;gap:14px;margin:12px 0 0;list-style:none;padding:0;color:#666;}
-    .quick-list li{background:#fff;padding:8px 12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.04);}
+    /* Hero with gradient background */
+    .hero{
+      padding:80px 0 100px;
+      background:linear-gradient(135deg, #fff 0%, #fffbf0 50%, #fff9e6 100%);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      right:-10%;
+      width:600px;
+      height:600px;
+      background:radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+      border-radius:50%;
+    }
+    .hero-grid{
+      display:flex;
+      gap:60px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+    .hero-text{flex:1 1 500px;}
+    .hero-text h2{
+      font-size:44px;
+      font-weight:700;
+      background:linear-gradient(135deg, #d4af37 0%, #c79b32 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      margin:0 0 20px;
+      line-height:1.3;
+    }
+    .hero-text p{
+      font-size:19px;
+      color:#555;
+      margin:0 0 28px;
+      line-height:1.8;
+    }
+    .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
+    .btn{
+      display:inline-block;
+      padding:14px 28px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      font-size:16px;
+      transition:all 0.3s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .btn:before{
+      content:'';
+      position:absolute;
+      top:50%;
+      left:50%;
+      width:0;
+      height:0;
+      border-radius:50%;
+      background:rgba(255,255,255,0.3);
+      transform:translate(-50%, -50%);
+      transition:width 0.6s, height 0.6s;
+    }
+    .btn:hover:before{width:300px;height:300px;}
+    .btn.primary{
+      background:linear-gradient(135deg, #d4af37 0%, #c79b32 100%);
+      color:#fff;
+      box-shadow:0 8px 20px rgba(199,155,50,0.3);
+    }
+    .btn.primary:hover{
+      box-shadow:0 12px 28px rgba(199,155,50,0.4);
+      transform:translateY(-2px);
+    }
+    .btn.outline{
+      background:transparent;
+      border:2px solid #c79b32;
+      color:#c79b32;
+    }
+    .btn.outline:hover{
+      background:#c79b32;
+      color:#fff;
+      box-shadow:0 8px 20px rgba(199,155,50,0.25);
+    }
+    .btn.sm{padding:10px 18px;font-size:14px;}
+    .quick-list{
+      display:flex;
+      gap:16px;
+      margin:16px 0 0;
+      list-style:none;
+      padding:0;
+      flex-wrap:wrap;
+    }
+    .quick-list li{
+      background:#fff;
+      padding:12px 20px;
+      border-radius:10px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.06);
+      font-size:14px;
+      color:#666;
+      font-weight:500;
+      border:1px solid rgba(199,155,50,0.1);
+      transition:all 0.3s ease;
+    }
+    .quick-list li:hover{
+      transform:translateY(-3px);
+      box-shadow:0 8px 20px rgba(0,0,0,0.1);
+      border-color:rgba(199,155,50,0.3);
+    }
 
-    /* Hero image */
-    .hero-media{flex:0 0 420px;text-align:center;}
-    .hero-media img{width:100%;max-width:420px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.08);}
+    /* Hero image with enhanced styling */
+    .hero-media{flex:0 0 450px;text-align:center;position:relative;}
+    .hero-media:before{
+      content:'';
+      position:absolute;
+      top:20px;
+      left:20px;
+      right:-20px;
+      bottom:-20px;
+      background:linear-gradient(135deg, rgba(212,175,55,0.15), rgba(199,155,50,0.1));
+      border-radius:20px;
+      z-index:-1;
+    }
+    .hero-media img{
+      width:100%;
+      max-width:450px;
+      border-radius:20px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.15);
+      transition:transform 0.5s ease;
+    }
+    .hero-media:hover img{transform:scale(1.02);}
 
-    /* Services (vertical) */
-    .services{padding:48px 0;}
-    .section-title{font-size:30px;color:#c79b32;margin-bottom:22px;text-align:center;}
-    .services-list{display:flex;flex-direction:column;gap:22px;max-width:920px;margin:0 auto;}
-    .service-item{display:flex;gap:18px;background:#fff;padding:12px;border-radius:14px;align-items:center;box-shadow:0 6px 18px rgba(0,0,0,0.06);}
-    .service-item img{width:240px;height:150px;object-fit:cover;border-radius:10px;}
+    /* Services with card hover effects */
+    .services{padding:80px 0;background:#fff;}
+    .section-title{
+      font-size:38px;
+      font-weight:700;
+      background:linear-gradient(135deg, #d4af37 0%, #c79b32 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      margin-bottom:50px;
+      text-align:center;
+    }
+    .services-list{
+      display:flex;
+      flex-direction:column;
+      gap:32px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .service-item{
+      display:flex;
+      gap:28px;
+      background:#fff;
+      padding:20px;
+      border-radius:20px;
+      align-items:center;
+      box-shadow:0 8px 30px rgba(0,0,0,0.08);
+      border:1px solid rgba(199,155,50,0.1);
+      transition:all 0.4s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .service-item:before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:4px;
+      height:0;
+      background:linear-gradient(180deg, #d4af37, #c79b32);
+      transition:height 0.4s ease;
+    }
+    .service-item:hover{
+      transform:translateY(-8px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.12);
+      border-color:rgba(199,155,50,0.3);
+    }
+    .service-item:hover:before{height:100%;}
+    .service-item img{
+      width:280px;
+      height:180px;
+      object-fit:cover;
+      border-radius:16px;
+      transition:transform 0.4s ease;
+    }
+    .service-item:hover img{transform:scale(1.05);}
     .service-content{flex:1;}
     [dir="rtl"] .service-content{text-align:right;}
     [dir="ltr"] .service-content{text-align:left;}
-    .service-content h4{margin:0 0 8px;color:#c79b32;font-size:20px;}
-    .service-content p{margin:0 0 10px;color:#555;font-size:16px;}
-
-    /* Features */
-    .features{padding:36px 0;background:linear-gradient(90deg,#fff,#fff);margin-top:8px;}
-    .features-grid{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
-    .feature{background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.05);width:250px;text-align:center;}
-    .feature img{width:64px;height:64px;margin-bottom:12px;}
-
-    /* Contact grid */
-    .contact{padding:36px 0;}
-    .contact-grid{display:grid;grid-template-columns:1fr 430px;gap:28px;align-items:start;}
-    .contact-info{background:#fff;padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);}
-    .contact-info h3{margin-top:0;color:#c79b32;}
-    .contact-form{background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);}
-    .contact-form label{display:block;margin-top:8px;font-size:14px;color:#444;}
-    .contact-form input, .contact-form textarea, .contact-form select{
-      width:100%;padding:10px;border-radius:8px;border:1px solid #e6e0d8;margin-top:6px;font-size:15px;
+    .service-content h4{
+      margin:0 0 12px;
+      background:linear-gradient(135deg, #d4af37 0%, #c79b32 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      font-size:24px;
+      font-weight:700;
     }
-    .contact-form button{margin-top:12px;border:none;cursor:pointer;background:#c79b32;color:#fff;padding:12px 16px;border-radius:8px;font-size:16px;}
+    .service-content p{
+      margin:0 0 16px;
+      color:#666;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    /* Features with icon animations */
+    .features{
+      padding:80px 0;
+      background:linear-gradient(135deg, #fffbf0 0%, #fff9e6 100%);
+    }
+
+    /* Creative sections (stats, testimonials, gallery, CTA) */
+    .stats{
+      padding:48px 0;
+      background:var(--card);
+    }
+    .stats-grid{display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+    .stat-item{flex:1;min-width:160px;background:var(--card);padding:22px;border-radius:12px;box-shadow:var(--shadow);text-align:center;border:1px solid rgba(199,155,50,0.06)}
+    .stat-item h3{margin:6px 0;font-size:28px;color:var(--gold-2)}
+    .stat-item p{margin:0;color:var(--muted)}
+
+    .cta-section{padding:60px 0;background:linear-gradient(90deg, rgba(212,175,55,0.06), rgba(199,155,50,0.03));border-top:1px solid rgba(199,155,50,0.05);border-bottom:1px solid rgba(199,155,50,0.03)}
+    .cta-inner{display:flex;gap:32px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .cta-text{flex:1;min-width:260px}
+    .cta-text h3{font-size:30px;margin:0 0 8px;background:var(--accent);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .cta-text p{color:var(--muted);margin:0}
+
+    .testimonials{padding:60px 0;background:linear-gradient(135deg,#fff9f0 0%, #fff 100%)}
+    .test-slider{position:relative;overflow:hidden;border-radius:16px}
+    .test-slides{display:flex;transition:transform .5s ease}
+    .testimonial{min-width:100%;box-sizing:border-box;padding:32px 24px;background:var(--card);box-shadow:var(--shadow);border-radius:12px}
+    .testimonial p{color:var(--muted);margin:0 0 12px}
+    .testimonial h4{margin:0;color:var(--gold-2)}
+    .test-dots{display:flex;gap:8px;justify-content:center;margin-top:16px}
+    .test-dot{width:10px;height:10px;border-radius:50%;background:#ddd;cursor:pointer}
+    .test-dot.active{background:var(--gold-2)}
+
+    .gallery{padding:48px 0}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:12px;box-shadow:var(--shadow)}
+
+    .features-grid{
+      display:flex;
+      gap:32px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .feature{
+      background:#fff;
+      padding:32px 24px;
+      border-radius:20px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.08);
+      width:280px;
+      text-align:center;
+      transition:all 0.4s ease;
+      border:1px solid rgba(199,155,50,0.1);
+    }
+    .feature:hover{
+      transform:translateY(-12px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.12);
+      border-color:rgba(199,155,50,0.3);
+    }
+    .feature img{
+      width:72px;
+      height:72px;
+      margin-bottom:20px;
+      transition:transform 0.4s ease;
+      filter:drop-shadow(0 4px 12px rgba(199,155,50,0.2));
+    }
+    .feature:hover img{transform:scale(1.15) rotate(5deg);}
+    .feature h5{
+      margin:0 0 12px;
+      font-size:20px;
+      font-weight:700;
+      color:#c79b32;
+    }
+    .feature p{
+      margin:0;
+      color:#666;
+      font-size:15px;
+      line-height:1.6;
+    }
+
+    /* Contact section with enhanced forms */
+    .contact{padding:80px 0;background:#fff;}
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 480px;
+      gap:40px;
+      align-items:start;
+    }
+    .contact-info{
+      background:linear-gradient(135deg, #fffbf0 0%, #fff9e6 100%);
+      padding:40px;
+      border-radius:20px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.08);
+      border:1px solid rgba(199,155,50,0.2);
+    }
+    .contact-info h3{
+      margin-top:0;
+      font-size:28px;
+      font-weight:700;
+      background:linear-gradient(135deg, #d4af37 0%, #c79b32 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .contact-info p{
+      color:#555;
+      font-size:16px;
+      margin:12px 0;
+    }
+    .small-contacts{
+      margin-top:24px;
+      padding-top:24px;
+      border-top:2px solid rgba(199,155,50,0.2);
+    }
+    .small-contacts p{
+      font-size:15px;
+      margin:10px 0;
+    }
+    .small-contacts strong{
+      color:#c79b32;
+      font-weight:700;
+    }
+    .contact-form{
+      background:#fff;
+      padding:40px;
+      border-radius:20px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.08);
+      border:1px solid rgba(199,155,50,0.1);
+    }
+    .contact-form label{
+      display:block;
+      margin-top:16px;
+      font-size:15px;
+      color:#333;
+      font-weight:600;
+      margin-bottom:8px;
+    }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select{
+      width:100%;
+      padding:14px 16px;
+      border-radius:12px;
+      border:2px solid #e8e8e8;
+      font-size:15px;
+      transition:all 0.3s ease;
+      font-family:inherit;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus{
+      outline:none;
+      border-color:#c79b32;
+      box-shadow:0 0 0 4px rgba(199,155,50,0.1);
+    }
+    .contact-form button{
+      margin-top:24px;
+      width:100%;
+      border:none;
+      cursor:pointer;
+      background:linear-gradient(135deg, #d4af37 0%, #c79b32 100%);
+      color:#fff;
+      padding:16px;
+      border-radius:12px;
+      font-size:17px;
+      font-weight:700;
+      transition:all 0.3s ease;
+      box-shadow:0 8px 20px rgba(199,155,50,0.3);
+    }
+    .contact-form button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 28px rgba(199,155,50,0.4);
+    }
 
     /* Footer */
-    .site-footer{background:#f0eee9;padding:18px 0;margin-top:28px;}
-    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
-    .footer-inner p{margin:0;color:#666;}
-    .footer-links a{color:#666;text-decoration:none;}
-    [dir="rtl"] .footer-links a{margin-left:14px;}
-    [dir="ltr"] .footer-links a{margin-right:14px;}
-    .footer-links a:hover{color:#c79b32;}
+    .site-footer{
+      background:linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      padding:32px 0;
+      margin-top:0;
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .footer-inner p{margin:0;color:#ccc;font-size:15px;}
+    .footer-links a{
+      color:#ccc;
+      text-decoration:none;
+      transition:color 0.3s ease;
+      font-size:15px;
+    }
+    [dir="rtl"] .footer-links a{margin-left:20px;}
+    [dir="ltr"] .footer-links a{margin-right:20px;}
+    .footer-links a:hover{color:#d4af37;}
 
     /* Responsive */
     @media (max-width:900px){
-      .hero-grid{flex-direction:column-reverse;align-items:center;}
-      .hero-media{order:-1;}
+      .hero{padding:60px 0 70px;}
+      .hero-text h2{font-size:34px;}
+      .hero-grid{flex-direction:column-reverse;align-items:center;gap:40px;}
+      .hero-media{order:-1;flex:0 0 auto;}
       .contact-grid{grid-template-columns:1fr;}
-      .service-item{flex-direction:column;align-items:flex-end;}
-      .service-item img{width:100%;height:220px;border-radius:10px;}
+      .stats-grid{flex-direction:column;gap:16px}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .cta-inner{flex-direction:column;align-items:center;text-align:center}
+      .testimonials .testimonial{padding:20px}
+      .service-item{flex-direction:column;align-items:flex-start;}
+      .service-item img{width:100%;height:240px;}
+      .main-nav{gap:16px;}
+      .main-nav a{font-size:15px;}
+      .features-grid{gap:24px;}
+      .feature{width:100%;max-width:320px;}
+      .section-title{font-size:32px;}
+    }
+
+    /* Smooth animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .service-item, .feature, .hero-text, .hero-media {
+      animation: fadeInUp 0.8s ease-out;
     }
   </style>
 </head>
@@ -126,14 +565,14 @@
 
   <!-- Floating WhatsApp -->
   <a class="whatsapp" href="https://whatsapp.com/channel/0029VbBLp5kJENxs4OUjVD2p" target="_blank" aria-label="واتساب">
-    <img src="/Project_Folder/puplic/assests/whatsapp_icon.png" alt="whatsapp" />
+    <img src="assests/whatsapp_icon.png" alt="whatsapp" />
   </a>
 
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
-        <img src="/Project_Folder/puplic/assests/logo_vip.ico" alt="VIP Travel" class="logo" />
+        <img src="fav.ico/logo_vip.ico" alt="VIP Travel" class="logo" />
         <div>
           <h1 class="brand-title">VIP Travel</h1>
           <p class="brand-sub" data-ar="مستوى خدمة يليق بك" data-en="Service Level You Deserve">مستوى خدمة يليق بك</p>
@@ -170,7 +609,7 @@
       </div>
 
       <div class="hero-media">
-        <img src="/Project_Folder/puplic/assests/hero_image.jpeg" alt="Limousine" />
+        <img src="assests/hero_image.jpeg" alt="Limousine" />
       </div>
     </div>
   </section>
@@ -181,38 +620,38 @@
       <h3 class="section-title" data-ar="خدماتنا" data-en="Our Services">خدماتنا</h3>
       <div class="services-list">
         <article class="service-item">
-          <img src="/Project_Folder/puplic/assests/wedding_service.png" alt="ليموزين زفاف" />
+          <img src="assests/wedding_service.png" alt="ليموزين زفاف" />
           <div class="service-content">
             <h4 data-ar="ليموزين الزفاف" data-en="Wedding Limousine">ليموزين الزفاف</h4>
             <p data-ar="تجهيزات خاصة ليوم الزفاف مع سائقين محترفين وضيافة مميزة لضمان تجربة لا تُنسى." data-en="Special wedding day arrangements with professional drivers and exceptional hospitality to ensure an unforgettable experience.">تجهيزات خاصة ليوم الزفاف مع سائقين محترفين وضيافة مميزة لضمان تجربة لا تُنسى.</p>
-            <a class="btn sm" href="#contact" data-ar="احجز لليوم" data-en="Book Today">احجز لليوم</a>
+            <a class="btn sm primary" href="#contact" data-ar="احجز لليوم" data-en="Book Today">احجز لليوم</a>
           </div>
         </article>
 
         <article class="service-item">
-          <img src="/Project_Folder/puplic/assests/buissnesman_service.png" alt="ليموزين رجال أعمال" />
+          <img src="assests/buissnesman_service.png" alt="ليموزين رجال أعمال" />
           <div class="service-content">
             <h4 data-ar="ليموزين رجال الأعمال" data-en="Business Limousine">ليموزين رجال الأعمال</h4>
             <p data-ar="تنقلات راقية ومريحة لرجال الأعمال مع التزام بالمواعيد والتجهيزات المناسبة للاجتماعات أثناء التنقل." data-en="Elegant and comfortable transportation for business professionals with punctuality and suitable amenities for meetings on the go.">تنقلات راقية ومريحة لرجال الأعمال مع التزام بالمواعيد والتجهيزات المناسبة للاجتماعات أثناء التنقل.</p>
-            <a class="btn sm" href="#contact" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</a>
+            <a class="btn sm primary" href="#contact" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</a>
           </div>
         </article>
 
         <article class="service-item">
-          <img src="/Project_Folder/puplic/assests/airport.png" alt="ليموزين مطار" />
+          <img src="assests/airport.png" alt="ليموزين مطار" />
           <div class="service-content">
             <h4 data-ar="توصيل المطارات" data-en="Airport Transfers">توصيل المطارات</h4>
             <p data-ar="استقبال وتوصيل من وإلى مطار القاهرة، برج العرب، والمطارات الأخرى — خدمة دقيقة وسريعة." data-en="Pick-up and drop-off to and from Cairo Airport, Borg El Arab, and other airports — precise and fast service.">استقبال وتوصيل من وإلى مطار القاهرة، برج العرب، والمطارات الأخرى — خدمة دقيقة وسريعة.</p>
-            <a class="btn sm" href="#contact" data-ar="حجز مطار" data-en="Book Airport">حجز مطار</a>
+            <a class="btn sm primary" href="#contact" data-ar="حجز مطار" data-en="Book Airport">حجز مطار</a>
           </div>
         </article>
 
         <article class="service-item">
-          <img src="/Project_Folder/puplic/assests/uin_service.jpeg" alt="رحلات جامعية" />
+          <img src="assests/uin_service.jpeg" alt="رحلات جامعية" />
           <div class="service-content">
             <h4 data-ar="رحلات جامعية" data-en="University Trips">رحلات جامعية</h4>
             <p data-ar="نقل الطلاب بين المدن بأمان وراحة مع خطط دورية وجدولة مرنة للجامعات." data-en="Safe and comfortable student transportation between cities with periodic plans and flexible scheduling for universities.">نقل الطلاب بين المدن بأمان وراحة مع خطط دورية وجدولة مرنة للجامعات.</p>
-            <a class="btn sm" href="#contact" data-ar="استفسار" data-en="Inquire">استفسار</a>
+            <a class="btn sm primary" href="#contact" data-ar="استفسار" data-en="Inquire">استفسار</a>
           </div>
         </article>
       </div>
@@ -225,115 +664,211 @@
       <h3 class="section-title" data-ar="مميزاتنا" data-en="Our Features">مميزاتنا</h3>
       <div class="features-grid">
         <div class="feature">
-          <img src="/Project_Folder/puplic/assests/hour.png" alt="24/7" />
+          <img src="assests/hour.png" alt="24/7" />
           <h5 data-ar="خدمة 24/7" data-en="24/7 Service">خدمة 24/7</h5>
           <p data-ar="نحن متاحون على مدار اليوم للحجز والرد على الاستفسارات." data-en="We are available around the clock for bookings and inquiries.">نحن متاحون على مدار اليوم للحجز والرد على الاستفسارات.</p>
         </div>
         <div class="feature">
-          <img src="/Project_Folder/puplic/assests/shield.png" alt="أمان" />
+          <img src="assests/shield.png" alt="أمان" />
           <h5 data-ar="سائقون محترفون" data-en="Professional Drivers">سائقون محترفون</h5>
           <p data-ar="سائقون مدربين وملتزمون بأعلى معايير الأمان والآداب العامة." data-en="Trained drivers committed to the highest standards of safety and etiquette.">سائقون مدربين وملتزمون بأعلى معايير الأمان والآداب العامة.</p>
-        </div>
-        <div class="feature">
-          <img src="/Project_Folder/puplic/assests/car.png" alt="أسطول" />
-          <h5 data-ar="أسطول حديث" data-en="Modern Fleet">أسطول حديث</h5>
-          <p data-ar="سيارات موديلات حديثة ومصانة دائماً لتوفير راحة كاملة." data-en="Modern model vehicles always maintained to provide complete comfort.">سيارات موديلات حديثة ومصانة دائماً لتوفير راحة كاملة.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="contact">
-    <div class="container contact-grid">
-      <div class="contact-info">
-        <h3 data-ar="للحجز أو الاستعلام" data-en="For Booking or Inquiry">للحجز أو الاستعلام</h3>
-        <p>Phone number – Phone number</p>
-        <p data-ar="البريد: info@viptravel.com" data-en="Email: info@viptravel.com">البريد: info@viptravel.com</p>
-        <p data-ar="فروعنا: القاهرة – الإسكندرية" data-en="Our Branches: Cairo – Alexandria">فروعنا: القاهرة – الإسكندرية</p>
-
-        <div class="small-contacts">
-          <p data-ar="الرقم الرئيسي: " data-en="Main Number: ">الرقم الرئيسي: <strong>phone number</strong></p>
-          <p data-ar="واتساب: " data-en="WhatsApp: ">واتساب: <strong>phone number</strong></p>
+  <!-- Creative Sections: Stats, CTA, Testimonials, Gallery -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>10+</h3>
+          <p>سنوات خبرة</p>
+        </div>
+        <div class="stat-item">
+          <h3>500+</h3>
+          <p>رحلة مُنجزة</p>
+        </div>
+        <div class="stat-item">
+          <h3>24/7</h3>
+          <p>خدمة على مدار الساعة</p>
+        </div>
+        <div class="stat-item">
+          <h3>★★★★★</h3>
+          <p>تقييم العملاء</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <form class="contact-form" action="#" method="post" onsubmit="alert('تم إرسال الرسالة (وهو مثال)'); return false;">
-        <label data-ar="الاسم" data-en="Name">الاسم</label>
-        <input type="text" name="name" required />
-        <label data-ar="الهاتف" data-en="Phone">الهاتف</label>
-        <input type="tel" name="phone" required />
-        <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
-        <input type="email" name="email" />
-        <label data-ar="الخدمة المطلوبة" data-en="Required Service">الخدمة المطلوبة</label>
-        <select name="service" id="service-select">
-          <option data-ar="ليموزين زفاف" data-en="Wedding Limousine">ليموزين زفاف</option>
-          <option data-ar="ليموزين رجال الأعمال" data-en="Business Limousine">ليموزين رجال الأعمال</option>
-          <option data-ar="توصيل مطار" data-en="Airport Transfer">توصيل مطار</option>
-          <option data-ar="رحلات جامعية" data-en="University Trips">رحلات جامعية</option>
-        </select>
-        <label data-ar="الرسالة" data-en="Message">الرسالة</label>
-        <textarea name="message" rows="5"></textarea>
-        <button class="btn primary" type="submit" data-ar="أرسل" data-en="Send">أرسل</button>
-      </form>
+  <section class="cta-section">
+    <div class="container cta-inner">
+      <div class="cta-text">
+        <h3>خدمة فاخرة، تجربة لا تُنسى</h3>
+        <p>سيارات مُعتنى بها، سائقون محترفون والتزام تام بالمواعيد — احجز الآن لتحصل على أفضل تجربة سفر.</p>
+      </div>
+      <div style="min-width:220px;text-align:left">
+        <a class="btn primary" href="#contact" style="padding:14px 28px;border-radius:12px">اطلب عرض سعر</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <h3 class="section-title">آراء العملاء</h3>
+      <div class="test-slider">
+        <div class="test-slides" id="test-slides">
+          <div class="testimonial">
+            <p>خدمة ممتازة. السائق كان محترفًا والوصول في الموعد المحدد. أنصح بشدة.</p>
+            <h4>أحمد م.</h4>
+          </div>
+          <div class="testimonial">
+            <p>التجربة كانت فاخرة والأسطول نظيف للغاية. فريق الدعم سريع الاستجابة.</p>
+            <h4>سارة ع.</h4>
+          </div>
+          <div class="testimonial">
+            <p>حجزت لزفاف صديق وكان كل شيء مرتب بدقة. شكراً لكم.</p>
+            <h4>محمود ر.</h4>
+          </div>
+        </div>
+        <div class="test-dots" id="test-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="container">
+      <h3 class="section-title">معرض الصور</h3>
+      <div class="gallery-grid">
+        <img src="assests/hero_image.jpeg" alt="gallery-1" />
+        <img src="assests/wedding_service.png" alt="gallery-2" />
+        <img src="assests/buissnesman_service.png" alt="gallery-3" />
+        <img src="assests/uin_service.jpeg" alt="gallery-4" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Quote Section (Arabic) -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h3 class="section-title">اطلب عرض سعر<br><span style="font-size:18px;color:#666;font-weight:500;">رد سريع</span></h3>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>تواصل معنا</h3>
+          <p>سنرد على رسالتك في أسرع وقت. اترك لنا بياناتك وسنقوم بالتواصل لتأكيد التفاصيل وترتيب الخدمة.</p>
+
+          <div class="small-contacts">
+            <p><strong>هاتف:</strong> <a href="tel:+" style="color:#333;text-decoration:none">+20 123 456 789</a></p>
+            <p><strong>بريد إلكتروني:</strong> <a href="mailto:info@viptravel.example" style="color:#333;text-decoration:none">info@viptravel.example</a></p>
+            <p><strong>الموقع:</strong> القاهرة - الإسكندرية</p>
+          </div>
+        </div>
+
+        <form id="quote-form" class="contact-form" novalidate>
+          <label for="name">الاسم</label>
+          <input id="name" name="name" type="text" placeholder="الاسم الكامل" required />
+
+          <label for="email">البريد الإلكتروني</label>
+          <input id="email" name="email" type="email" placeholder="your@mail.com" required />
+
+          <label for="message">الرسالة</label>
+          <textarea id="message" name="message" rows="6" placeholder="...اكتب رسالتك هنا" required></textarea>
+
+          <button type="submit">إرسال</button>
+        </form>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p data-ar="© 2025 VIP Travel. جميع الحقوق محفوظة." data-en="© 2025 VIP Travel. All Rights Reserved.">© 2025 VIP Travel. جميع الحقوق محفوظة.</p>
-      <div class="footer-links">
-        <a href="#" data-ar="شروط الاستخدام" data-en="Terms of Use">شروط الاستخدام</a>
-        <a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</a>
+      <div style="display:flex;gap:32px;align-items:flex-start;">
+        <div class="footer-links">
+          <h4 style="color:#ddd;margin:0 0 12px;font-size:16px">الدعم</h4>
+          <p style="margin:6px 0"><a href="#" data-ar="اتصل" style="color:inherit">اتصل</a></p>
+          <p style="margin:6px 0"><a href="#" data-ar="سياسة الخصوصية" style="color:inherit">سياسة الخصوصية</a></p>
+          <p style="margin:6px 0"><a href="#" data-ar="الشروط" style="color:inherit">الشروط</a></p>
+        </div>
+
+        <div class="footer-links">
+          <h4 style="color:#ddd;margin:0 0 12px;font-size:16px">الشركة</h4>
+          <p style="margin:6px 0"><a href="#" data-ar="من نحن" style="color:inherit">من نحن</a></p>
+          <p style="margin:6px 0"><a href="#" data-ar="الأسطول" style="color:inherit">الأسطول</a></p>
+          <p style="margin:6px 0"><a href="#" data-ar="الأسئلة الشائعة" style="color:inherit">الأسئلة الشائعة</a></p>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;opacity:0.8">
+        <img src="fav.ico/logo_vip.ico" alt="VIP" style="width:40px;height:40px;border-radius:8px;background:#fff;padding:4px"/>
+        <p style="color:#ccc;margin:0">&copy; <strong>VIP Travel</strong> جميع الحقوق محفوظة</p>
       </div>
     </div>
   </footer>
 
-  <!-- Language Switch Script -->
   <script>
-    const langBtn = document.getElementById('lang-switch');
-    let currentLang = 'ar';
+    (function(){
+      const form = document.getElementById('quote-form');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
 
-    langBtn.addEventListener('click', function() {
-      const html = document.documentElement;
-      
-      if (currentLang === 'ar') {
-        // Switch to English
-        currentLang = 'en';
-        html.setAttribute('lang', 'en');
-        html.setAttribute('dir', 'ltr');
-        this.textContent = 'AR';
-        
-        // Update all text elements
-        document.querySelectorAll('[data-en]').forEach(el => {
-          el.textContent = el.getAttribute('data-en');
-        });
-        
-        // Update select options
-        document.querySelectorAll('#service-select option').forEach(option => {
-          option.textContent = option.getAttribute('data-en');
-        });
-        
-      } else {
-        // Switch to Arabic
-        currentLang = 'ar';
-        html.setAttribute('lang', 'ar');
-        html.setAttribute('dir', 'rtl');
-        this.textContent = 'EN';
-        
-        // Update all text elements
-        document.querySelectorAll('[data-ar]').forEach(el => {
-          el.textContent = el.getAttribute('data-ar');
-        });
-        
-        // Update select options
-        document.querySelectorAll('#service-select option').forEach(option => {
-          option.textContent = option.getAttribute('data-ar');
-        });
-      }
-    });
+        if(!name || !email || !message){
+          alert('الرجاء ملء جميع الحقول');
+          return;
+        }
+
+        // Try to open mail client as a fallback and show success to user
+        const subject = encodeURIComponent('طلب عرض سعر من ' + name);
+        const body = encodeURIComponent('الاسم: ' + name + '\nالبريد: ' + email + '\n\n' + message);
+        const mailto = 'mailto:info@viptravel.example?subject=' + subject + '&body=' + body;
+
+        // show quick confirmation
+        const original = document.activeElement;
+        alert('تم إرسال الطلب. سنقوم بالتواصل معك قريبا.');
+
+        // open mail client (optional)
+        window.location.href = mailto;
+
+        form.reset();
+      });
+    })();
   </script>
 
+    <script>
+      // Simple testimonials slider
+      (function(){
+        const slidesEl = document.getElementById('test-slides');
+        const dotsEl = document.getElementById('test-dots');
+        if(!slidesEl) return;
+        const slides = slidesEl.children;
+        const count = slides.length;
+        let idx = 0;
+
+        // create dots
+        for(let i=0;i<count;i++){
+          const d = document.createElement('div');
+          d.className = 'test-dot' + (i===0? ' active':'');
+          d.dataset.i = i;
+          d.addEventListener('click', function(){ goTo(parseInt(this.dataset.i)); });
+          dotsEl.appendChild(d);
+        }
+
+        function update(){
+          slidesEl.style.transform = 'translateX(' + (-idx*100) + '%)';
+          Array.from(dotsEl.children).forEach((dot,i)=> dot.classList.toggle('active', i===idx));
+        }
+        function goTo(i){ idx = (i + count) % count; update(); }
+
+        let timer = setInterval(()=>{ idx = (idx+1)%count; update(); }, 4500);
+        // pause on hover
+        slidesEl.parentElement.addEventListener('mouseenter', ()=> clearInterval(timer));
+        slidesEl.parentElement.addEventListener('mouseleave', ()=> timer = setInterval(()=>{ idx = (idx+1)%count; update(); }, 4500));
+      })();
+    </script>
+
 </body>
-</html>
+</html>   
